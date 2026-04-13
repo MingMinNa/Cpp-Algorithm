@@ -14,5 +14,6 @@
 #include "sorting/counting_sort.hpp"
 #include "sorting/radix_sort.hpp"
 #include "sorting/bucket_sort.hpp"
+#include "sorting/tim_sort.hpp"
 
 #endif
