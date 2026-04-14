@@ -1,6 +1,7 @@
 #include "../algo_utils.hpp"
 #include "../others/order_statistic.hpp"
 #include <cstddef>
+#include <stdexcept>
 
 namespace algo_imp::sorting {
 
@@ -11,8 +12,13 @@ void counting_sort(T* arr, size_t n, Compare cmp)
     if(n == 0) return;
 
     auto [min_ele, max_ele] = algo_imp::others::find_min_max(arr, n);
+    size_t size = static_cast<size_t>(max_ele) - min_ele + 1;
 
-    size_t size = max_ele - min_ele + 1;
+    // overflow (e.g. max_ele == LLONG_MAX, min_ele == LLONG_MIN, max_ele - min_ele + 1 will be 0)
+    if(size == 0) {
+        throw std::runtime_error("Range computation overflow (max - min + 1)");
+    }
+
     std::vector<size_t> counts(size);
 
     for(size_t i = 0; i < n; ++i) {

@@ -7,8 +7,10 @@
 
 namespace algo_imp::sorting {
 
-template <HasCompareOps T, typename Compare = std::less<T>>
-void bucket_sort(T* arr, size_t n, Compare cmp = Compare{});
+const size_t MAX_NUM_BUCKETS = 1000ull;
+
+template <Numeric T, typename Compare = std::less<T>>
+void bucket_sort(T* arr, size_t n, size_t num_buckets = 0, Compare cmp = Compare{});
 
 }
 
