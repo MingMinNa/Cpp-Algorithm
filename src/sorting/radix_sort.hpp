@@ -7,7 +7,7 @@
 
 namespace algo_imp::sorting {
 
-const size_t NUM_BUCKETS = 1ull << 8;
+const size_t RADIX = 1ull << 8;
 
 template <std::unsigned_integral T, typename Compare = std::less<T>>
 void radix_sort(T* arr, size_t n, Compare cmp = Compare{});

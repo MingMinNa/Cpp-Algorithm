@@ -12,11 +12,11 @@ void radix_sort(T* arr, size_t n, Compare cmp)
     // special case
     if(n == 0) return;
     
-    // Note: num_buckets must be at least 2.
-    // General Case: size_t num_buckets = NUM_BUCKETS, div = 1;
-    size_t num_buckets = NUM_BUCKETS, pow = 0;
+    // Note: radix must be at least 2.
+    // General Case: size_t radix = ..., div = 1;
+    size_t radix = RADIX, pow = 0;
     auto [min_ele, max_ele] = algo_imp::others::find_min_max(arr, n);
-    bool done = false, descending = cmp(max_ele, min_ele);
+    bool descending = cmp(max_ele, min_ele);
     
     std::vector<T> temp_arr(arr, arr + n);
 
@@ -25,34 +25,34 @@ void radix_sort(T* arr, size_t n, Compare cmp)
         
         memcpy(temp_arr.data(), arr, n * sizeof(T));
 
-        // counting sort with buckets
-        std::vector<T> buckets(num_buckets);
+        // counting sort
+        std::vector<T> counts(radix);
 
         for(size_t i = 0; i < n; ++i) {
-            // General Case: size_t bucket_index = (temp_arr[i] / div) % num_buckets;
-            size_t bucket_index = (temp_arr[i] >> pow) & (num_buckets - 1);
-            buckets[bucket_index] ++;
+            // General Case: size_t radix_index = (temp_arr[i] / div) % radix;
+            size_t radix_index = (temp_arr[i] >> pow) & (radix - 1);
+            counts[radix_index] ++;
         }
 
         ptrdiff_t start = 0, end = 0, step = 0;
 
-        if(!descending) start = 1              , end = num_buckets, step =  1;
-        else            start = num_buckets - 2, end = -1         , step = -1;
+        if(!descending) start = 1        , end = radix, step =  1;
+        else            start = radix - 2, end = -1   , step = -1;
 
         for(ptrdiff_t i = start; i != end; i += step) {
-            buckets[i] += buckets[i - step];
+            counts[i] += counts[i - step];
         }
 
         for(ptrdiff_t i = n - 1; i >= 0; --i) {
-            // General Case: size_t bucket_index = (temp_arr[i] / div) % num_buckets;
-            size_t bucket_index = (temp_arr[i] >> pow) & (num_buckets - 1);
-            size_t rank = buckets[bucket_index];
+            // General Case: size_t radix_index = (temp_arr[i] / div) % radix;
+            size_t radix_index = (temp_arr[i] >> pow) & (radix - 1);
+            size_t rank = counts[radix_index];
             // rank is 1-based index.
             arr[TO_ZERO_BASE(rank)] = temp_arr[i];
-            buckets[bucket_index] --;
+            counts[radix_index] --;
         }
 
-        // General Case: div *= num_buckets;
+        // General Case: div *= radix;
         pow += 8; 
     }
 }
