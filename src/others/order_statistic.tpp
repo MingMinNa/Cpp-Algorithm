@@ -1,4 +1,5 @@
 #include "../algo_utils.hpp"
+#include "../sorting/quick_sort.hpp"
 #include <utility>
 #include <cstddef>
 #include <stdexcept>
@@ -66,7 +67,20 @@ std::pair<T, T> find_min_max(const T* arr, size_t n)
 template <HasCompareOps T>
 T find_ith_order(T* arr, size_t start, size_t end, size_t i)
 {
-    // TODO
+    if(start >= end) {
+        throw std::runtime_error("`start` must be less than `end`.");
+    }
+
+    size_t n = end - start;
+    if     (i <= 1) return find_min(arr + start, n);
+    else if(i >= n) return find_max(arr + start, n);
+
+    size_t mid = algo_imp::sorting::partition<T>(arr, start, end, false);
+    size_t rank = mid - start + 1;
+
+    if     (rank == i) return arr[mid];
+    else if(rank >  i) return find_ith_order(arr, start, mid, i);
+    return find_ith_order(arr, mid + 1, end, i - rank);
 }
 
 }

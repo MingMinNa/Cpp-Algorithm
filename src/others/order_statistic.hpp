@@ -7,16 +7,17 @@
 namespace algo_imp::others {
 
 template <HasCompareOps T>
-T find_min(const T* arr, uint64_t n);
+T find_min(const T* arr, size_t n);
 
 template <HasCompareOps T>
-T find_max(const T* arr, uint64_t n);
+T find_max(const T* arr, size_t n);
 
 template <HasCompareOps T>
-std::pair<T, T> find_min_max(const T* arr, uint64_t n);
+std::pair<T, T> find_min_max(const T* arr, size_t n);
 
+// Note: [start, end)
 template <HasCompareOps T>
-T find_ith_order(T* arr, uint64_t start, uint64_t end, uint64_t i);
+T find_ith_order(T* arr, size_t start, size_t end, size_t i);
 
 }
 
