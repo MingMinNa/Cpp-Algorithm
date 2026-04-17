@@ -3,7 +3,7 @@
 namespace algo_imp::searching {
 
 template <typename F>
-double ternary_search(double left, double right, F func, bool min = true)
+double ternary_search(double left, double right, F func, bool min)
 {
     const double eps = 1e-9;
     while(right - left > eps) {
