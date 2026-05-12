@@ -4,7 +4,7 @@
 namespace algo_imp::searching {
 
 template <HasCompareOps T>
-int64_t jump_search(T* arr, size_t n, T target)
+int64_t jump_search(T* arr, size_t n, const T &target)
 {
     if(n == 0) return -1;
     if(n == 1) return (arr[0] == target) ? (0) : (-1);
@@ -17,13 +17,14 @@ int64_t jump_search(T* arr, size_t n, T target)
         if(a >= n) return -1;
     }
 
+    size_t end = std::min(b, n);
+
     // Some elements >= target
-    while(arr[a] < target) {
+    while(a < end && arr[a] < target) {
         a ++;
-        if(a == std::min(b + 1, n)) return -1;
     }
 
-    if(arr[a] == target) return a;
+    if(a < end && arr[a] == target) return a;
     return -1;
 }
    

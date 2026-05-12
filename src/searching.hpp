@@ -1,10 +1,13 @@
-#ifndef ALGO_SEARCHING
-#define ALGO_SEARCHING
+#ifndef ALGO_ARRAY_SEARCHING
+#define ALGO_ARRAY_SEARCHING
 
-#include "searching/linear_search.hpp"
-#include "searching/binary_search.hpp"
-#include "searching/ternary_search.hpp"
-#include "searching/jump_search.hpp"
-#include "searching/interpolation_search.hpp"
+/* Sorted Array Searching */
+#include "array_searching/linear_search.hpp"
+#include "array_searching/binary_search.hpp"
+#include "array_searching/ternary_search.hpp"
+#include "array_searching/jump_search.hpp"
+#include "array_searching/interpolation_search.hpp"
+#include "array_searching/fib_search.hpp"
+#include "array_searching/exp_search.hpp"
 
 #endif

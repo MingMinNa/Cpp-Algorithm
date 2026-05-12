@@ -6,7 +6,7 @@
 namespace algo_imp::searching {
 
 template <HasCompareOps T>
-int64_t jump_search(T* arr, size_t n, T target);
+int64_t jump_search(T* arr, size_t n, const T &target);
    
 }
 

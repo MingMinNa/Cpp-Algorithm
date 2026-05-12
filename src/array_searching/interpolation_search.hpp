@@ -5,9 +5,9 @@
 
 namespace algo_imp::searching {
 
-// Note: [left, right]
+// Note: [start, end]
 template <HasCompareOps T>
-int64_t interpolation_search(T* arr, int64_t start, int64_t end, T target);
+int64_t interpolation_search(T* arr, size_t n, const T &target);
    
 }
 
